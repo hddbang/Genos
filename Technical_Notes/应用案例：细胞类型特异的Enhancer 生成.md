@@ -122,7 +122,7 @@ $$
 -   **CPT model**
 
 1.  Blast比对
- <p align="center">
+<p align="center">
   <img src="images-enhancer/table-004.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
 
@@ -136,16 +136,16 @@ $$
 
 [2] Khoury G, Gruss P. Enhancer elements[J]. Cell, 1983, 33(2): 313-314.
 
-[3]Gao T, Qian J. EnhancerAtlas 2.0: an updated resource with enhancer annotation in 586 tissue/cell types across nine species[J]. Nucleic acids research, 2020, 48(D1): D58-D64.
+[3] Gao T, Qian J. EnhancerAtlas 2.0: an updated resource with enhancer annotation in 586 tissue/cell types across nine species[J]. Nucleic acids research, 2020, 48(D1): D58-D64.
 
-[4]Boratyn G M, Camacho C, Cooper P S, et al. BLAST: a more efficient report with usability improvements[J]. Nucleic acids research, 2013, 41(W1): W29-W33.
+[4] Boratyn G M, Camacho C, Cooper P S, et al. BLAST: a more efficient report with usability improvements[J]. Nucleic acids research, 2013, 41(W1): W29-W33.
 
-[5]D'haeseleer P. What are DNA sequence motifs?[J]. Nature biotechnology, 2006, 24(4): 423-425.
+[5] D'haeseleer P. What are DNA sequence motifs?[J]. Nature biotechnology, 2006, 24(4): 423-425.
 
-[6]Moore J E, Purcaro M J, Pratt H E, et al. Expanded encyclopaedias of DNA elements in the human and mouse genomes[J]. Nature, 2020, 583(7818): 699-710.
+[6] Moore J E, Purcaro M J, Pratt H E, et al. Expanded encyclopaedias of DNA elements in the human and mouse genomes[J]. Nature, 2020, 583(7818): 699-710.
 
-[7]Church D M, Schneider V A, Graves T, et al. Modernizing reference genome assemblies[J]. PLoS biology, 2011, 9(7): e1001091.
+[7] Church D M, Schneider V A, Graves T, et al. Modernizing reference genome assemblies[J]. PLoS biology, 2011, 9(7): e1001091.
 
-[8]Guo Y, Dai Y, Yu H, et al. Improvements and impacts of GRCh38 human reference on high throughput sequencing data analysis[J]. Genomics, 2017, 109(2): 83-90.
+[8] Guo Y, Dai Y, Yu H, et al. Improvements and impacts of GRCh38 human reference on high throughput sequencing data analysis[J]. Genomics, 2017, 109(2): 83-90.
 
 ****
