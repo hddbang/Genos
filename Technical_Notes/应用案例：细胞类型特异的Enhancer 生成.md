@@ -2,6 +2,7 @@
 
 **2025-11-24**
 
+
 **任务描述**
 
 本任务基于Genos模型\[1\]对于基因组的大量预训练积累，通过对增强子（Enhancer）数据\[2\]的继续预训练，获得增强子生成模型，实现增强子序列生成。其科学意义在于构建了细胞类型和细胞活性表达到增强子序列之间的泛映射关系，实现了基于细胞类型生成多种增强子序列的功能，为研究基于细胞类型的增强子活性值表达提供了通用工具。
@@ -34,7 +35,10 @@
 
 模型训练基于Z2000完成，训练8个周期，训练Tokens数量达到40B，学习率和训练loss 如下所示：
 
-![4e9739bdf2f58d6a9e82495c1393c415](images-enhancer/image-001.png){width="2.3625in" height="1.6083333333333334in"} ![57dea38294da2337daaef837544efbfc](images-enhancer/image-002.png){width="2.3625in" height="1.676388888888889in"}
+<p align="center">
+  <img src="images-enhancer/image-001.png" style="width:45%; max-width:400px; display:inline-block;" alt="学习率曲线"/>
+  <img src="images-enhancer/image-002.png" style="width:45%; max-width:400px; display:inline-block;" alt="训练 Loss 曲线"/>
+</p>
 
 图1. 学习率与loss曲线。随着训练步数增加，学习率保持稳定，模型loss呈现稳定下降趋势。当训练步数达到30000时，模型loss 趋于收敛。
 
