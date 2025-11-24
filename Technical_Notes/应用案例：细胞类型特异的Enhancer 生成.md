@@ -38,7 +38,7 @@
   <img src="images-enhancer/image-001.png" style="width:35%; max-width:300px; display:inline-block;"/>
   <img src="images-enhancer/image-002.png" style="width:35%; max-width:300px; display:inline-block;"/>
 </p>
-图1. 学习率与loss曲线。随着训练步数增加，学习率保持稳定，模型loss呈现稳定下降趋势。当训练步数达到30000时，模型loss 趋于收敛。
+<figcaption>图1. 学习率与loss曲线。随着训练步数增加，学习率保持稳定，模型loss呈现稳定下降趋势。当训练步数达到30000时，模型loss 趋于收敛。</figcaption>
 
 <div>&nbsp;</div>
 
@@ -87,15 +87,13 @@ $$
 <p align="center">
   <img src="images-enhancer/table-001.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
-
-表1. CPT模型生成序列集的blast比对。Prompt序列长度设置为30bp，CPT模型生成的序列经过BWA过滤，获取159584条可靠序列。参考ENCODE数据集，CPT模型生成的高质量enhancer 序列数量多于基础模型生成的enhancer序列。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。
+<figcaption>表1. CPT模型生成序列集的blast比对。Prompt序列长度设置为30bp，CPT模型生成的序列经过BWA过滤，获取159584条可靠序列。参考ENCODE数据集，CPT模型生成的高质量enhancer 序列数量多于基础模型生成的enhancer序列。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。</figcaption>
 
   2.seq2seq（target sequence based）
 <p align="center">
   <img src="images-enhancer/table-002.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
-
-表2. CPT模型生成序列的blast比对。Prompt序列长度设置为30bp，CPT模型生成enhancer 能力在不同置信度（identity & coverage）下均优于基础模型。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。
+<figcaption>表2. CPT模型生成序列的blast比对。Prompt序列长度设置为30bp，CPT模型生成enhancer 能力在不同置信度（identity & coverage）下均优于基础模型。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。</figcaption>
 
 -   **Motif比对(**prompt=30bp**)**
 
