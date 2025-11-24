@@ -143,3 +143,5 @@ $$LCS\ ratio\  = \ \frac{共同最长子字符串长度}{较长字符串长度} 
 8.  Guo, Yan et al.,Improvements and impacts of GRCh38 human reference on high throughput sequencing data analysis, Genomics,2017,109(2):
 
     83-90
+
+****
