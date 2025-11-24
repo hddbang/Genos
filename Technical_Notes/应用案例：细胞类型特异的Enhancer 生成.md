@@ -102,8 +102,7 @@ $$
  <p align="center">
   <img src="images-enhancer/table-003.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
-
-表3. CPT模型生成序列的Motif特性比对。参考HOCOMOCO，验证集涵盖12个细胞类型，27695条序列。基于不同可靠性阈值（Jaccard index/LCS ratio），CPT模型的生成能力均优于基础模型。
+<figcaption>表3. CPT模型生成序列的Motif特性比对。参考HOCOMOCO，验证集涵盖12个细胞类型，27695条序列。基于不同可靠性阈值（Jaccard index/LCS ratio），CPT模型的生成能力均优于基础模型。</figcaption>
 
 
 **分析验证**
