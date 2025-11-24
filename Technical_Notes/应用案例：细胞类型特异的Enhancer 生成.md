@@ -80,19 +80,19 @@ $$
 
 **评测**
 
-- **Blast比对**
+-  **Blast比对**
 
-- set2set（ENCODE database based）
+  1.set2set（ENCODE database based）
 
 <p align="center">
-  <img src="images-enhancer/table-001.png" style="width:60%; max-width:300px; display:inline-block;"/>
+  <img src="images-enhancer/table-001.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
 
 表1. CPT模型生成序列集的blast比对。Prompt序列长度设置为30bp，CPT模型生成的序列经过BWA过滤，获取159584条可靠序列。参考ENCODE数据集，CPT模型生成的高质量enhancer 序列数量多于基础模型生成的enhancer序列。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。
 
--   seq2seq（target sequence based）
+  2.seq2seq（target sequence based）
 <p align="center">
-  <img src="images-enhancer/table-002.png" style="width:60%; max-width:300px; display:inline-block;"/>
+  <img src="images-enhancer/table-002.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
 
 表2. CPT模型生成序列的blast比对。Prompt序列长度设置为30bp，CPT模型生成enhancer 能力在不同置信度（identity & coverage）下均优于基础模型。当identity95%&coverage95%时，CPT模型的生成能力超过基础模型10倍。
