@@ -126,7 +126,7 @@ $$
 <p align="center">
   <img src="images-enhancer/table-004.png" style="width:50%; max-width:300px; display:inline-block;"/>
 </p>
-<figcaption>表4. seq\_103539的blast分析。</figcaption>
+<figcaption>表4. seq_103539的blast分析。</figcaption>
 
 
 2.  Motif模式：106 个 motif，LCS ratio=0.9639, motif jaccard=0.9358。
