@@ -182,5 +182,5 @@ If you use Genos in your research, please cite:
 MIT License. See [LICENSE](LICENSE) for details.
 
 ## Contact
-For questions or collaboration: **bgi-Genos@genomics.cn**
+For questions or collaboration: **Genos@genomics.cn**
 
