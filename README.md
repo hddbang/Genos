@@ -85,11 +85,11 @@ Genos基于Transformer架构，采用混合专家网络（Mixture-of-Experts, M
 
 1. 拉取环境
    ```bash
-   docker pull zhanxiaoai/mega:v1 
+   docker pull bgigenos/mega:v1 
    ```
 2. 启动容器
    ```bash
-   docker run -it --gpus all --shm-size 32g mega:v1 /bin/bash
+   docker run -it --gpus all --shm-size 32g bgigenos/mega:v1 /bin/bash
    ```
 3. 下载权重  
 
