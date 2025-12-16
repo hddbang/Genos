@@ -33,7 +33,7 @@ Genos_npu/
 
 ```bash
 cd Genos/Genos_npu
-docker build -t genos-npu-image .
+docker build --network=host -t genos-npu-image .
 ```
 
 ### 2. 运行Docker容器
@@ -43,6 +43,7 @@ docker build -t genos-npu-image .
 ```bash
 docker run --rm -d \
 --name genos-npu-server \
+--network=host \
 --device=/dev/davinci0 \
 --device /dev/davinci_manager \
 --device /dev/devmm_svm \
@@ -54,14 +55,14 @@ docker run --rm -d \
 -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info \
 -v /etc/ascend_install.info:/etc/ascend_install.info \
 -v /本地/模型/目录/:/AI_models/BGI-HangzhouAI/ \
--p 8888:8000 \
+-p 8000:8000 \
 -it genos-npu-image
 ```
 
 **参数说明**：
 - `--device=/dev/davinci0`：指定使用的NPU设备（根据实际情况调整）
 - `-v /本地/模型/目录/:/AI_models/BGI-HangzhouAI/`：挂载模型文件目录到容器内
-- `-p 8888:8000`：端口映射，将容器的8000端口映射到宿主机的8888端口
+- `-p 8000:8000`：端口映射，这个看实际情况，宿主机的8000端口被占用了就可以调整，比如-p 8888:8000
 - `-d`：后台运行容器
 
 ### 3. 调用API接口
@@ -71,7 +72,7 @@ docker run --rm -d \
 #### 提取DNA序列Embedding
 
 ```bash
-curl -X POST http://localhost:8888/extract \
+curl -X POST http://localhost:8000/extract \
 -H "Content-Type: application/json" \
 -d '{"sequence": "GGATCCGGATCCGGATCCGGATCC", "model_name": "10B", "pooling_method": "max"}'
 ```
@@ -79,7 +80,7 @@ curl -X POST http://localhost:8888/extract \
 #### 预测DNA序列下游碱基
 
 ```bash
-curl -X POST http://localhost:8888/predict \
+curl -X POST http://localhost:8000/predict \
 -H "Content-Type: application/json" \
 -d '{"sequence": "GGATCCGGATCCGGATCCGGATCC", "model_name": "10B", "predict_length": 25}'
 ```
@@ -164,6 +165,7 @@ curl -X POST http://localhost:8888/predict \
 ```bash
 docker run --rm -d \
 --name genos-npu-server \
+--network=host \
 --device=/dev/davinci0 \
 --device /dev/davinci_manager \
 --device /dev/devmm_svm \
@@ -174,7 +176,7 @@ docker run --rm -d \
 -v /usr/local/Ascend/driver/lib64/:/usr/local/Ascend/driver/lib64/ \
 -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info \
 -v /etc/ascend_install.info:/etc/ascend_install.info \
--v /storeData/AI_models/modelscope/hub/models/BGI-HangzhouAI/:/AI_models/BGI-HangzhouAI/ \
+-v /DW/AI_models/modelscope/hub/models/BGI-HangzhouAI/:/AI_models/BGI-HangzhouAI/ \
 -it genos-npu-image \
 python genos_server.py --device npu:0
 ```
