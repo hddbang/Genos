@@ -1,148 +1,172 @@
 # Genos：人类基因组基础模型
 
-![model](images/Genos_LOGO.png)
+![model](images/Genos_LOGO.gif)
 
-[![Documentation Status](https://readthedocs.org/projects/genos-client/badge/?version=latest)](https://genos-client.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/genos-client.svg)](https://badge.fury.io/py/genos-client) ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FBGI-HangzhouAI%2FGenos&label=visitors&icon=github&color=%6ec044&message=&style=flat&tz=UTC) [![Collection](https://img.shields.io/badge/🤗-Genos%20%20Collection-blue)](https://huggingface.co/collections/BGI-HangzhouAI/genos)
+<div align="center" style="line-height: 2;">
+
+[![Documentation Status](https://readthedocs.org/projects/genos-client/badge/?version=latest)](https://genos-client.readthedocs.io/en/latest/?badge=latest)  [![PyPI version](https://badge.fury.io/py/genos-client.svg)](https://badge.fury.io/py/genos-client)  [![Collection](https://img.shields.io/badge/🤗-Genos%20%20Collection-blue)](https://huggingface.co/collections/BGI-HangzhouAI/genos)
+ <a href="https://cloud.stomics.tech/#/inferance-web?type=model" target="_blank">
+      <img alt="DCS" src="https://img.shields.io/badge/☁️%20DCS-Inference Services%20-6f42c1"/>
+  </a>
+  <a href="https://www.zero2x.org/genos" target="_blank">
+      <img alt="Homepage" src="https://img.shields.io/badge/🌐%20Homepage-zero2x%20-536af5"/>
+  </a>
+  <a href="https://academic.oup.com/gigascience/advance-article/doi/10.1093/gigascience/giaf132/8296738?login=false" target="_blank">
+      <img alt="Technical Report" src="https://img.shields.io/badge/📜%20Technical Report-GigaSience-brightgreen?logo=Linkedin&logoColor=white"/>
+  </a>
+  <a href="https://github.com/BGI-HangzhouAI/Genos/blob/main/LICENSE" target="_blank">
+       <img alt="License" src="https://img.shields.io/badge/📑%20License- Apache 2.0-f5de53"/> 
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FBGI-HangzhouAI%2FGenos&label=visitors&icon=github&color=%6ec044&message=&style=flat&tz=UTC)
 
 
-## 1. 目录
+ [English](README_en.md) ｜ [中文](README_zh.md) 
 
-- [Genos：人类基因组基础模型](#genos人类基因组基础模型)
-  - [1. 目录](#1-目录)
-  - [2. 简要说明](#2简要说明)
-  - [3. 模型说明](#3模型说明)
-    - [数据](#数据)
-    - [架构](#架构)
-  - [4. 部署及使用](#4部署及使用)
-  - [5. 性能测评](#5性能测评)
-  - [6. 应用场景案例说明](#6应用场景案例说明)
-    - [案例1：RNA-seq数据生成](#案例1rna-seq数据生成)
-    - [案例2： 基因模型+文本模型疾病预测](#案例2基因模型文本模型疾病预测)
-      - [项目概述](#项目概述)
-      - [结果数据对比](#结果数据对比)
-  - [7. 数据可用性](#7数据可用性)
-  - [8. Licence 说明](#8licence说明)
-  - [9. 联系我们](#9联系我们)
-  - [References](#references)
+</div>
 
-## 2. 简要说明
 
-Genos：人类基因组基础模型
 
-【模型架构与技术突破】
+
+## 目录
+
+- [更新速览](#更新速览)
+- [模型简介](#模型简介)
+- [模型与数据](#模型与数据)
+  - [训练数据](#训练数据)
+  - [模型架构](#模型架构)
+  - [Genos-10B-v2 亮点](#genos-10b-v2-亮点)
+- [性能测评](#性能测评)
+- [部署与使用](#部署与使用)
+  - [Docker 部署](#docker-部署)
+  - [模型下载](#模型下载)
+  - [API/SDK](#apisdk)
+  - [Notebook 示例](#notebook-示例)
+- [应用案例](#应用案例)
+  - [案例1：RNA-seq数据生成](#案例1rna-seq数据生成)
+  - [案例2：基因模型+文本模型疾病预测](#案例2基因模型文本模型疾病预测)
+- [推理优化与适配](#推理优化与适配)
+- [数据可用性](#数据可用性)
+- [许可证](#许可证)
+- [引用](#引用)
+- [联系我们](#联系我们)
+
+## 更新速览
+
+- 发布Genos-10B-v2模型：`Genos-10B-v2`。
+- v2 核心更新：引入非人灵长类与多种哺乳动物基因组，并采用分阶段、1:1 混合策略，提升跨物种泛化与进化背景建模。
+- 新增评测：（1）跨物种泛化能力；（2）超长上下文任务新增
+- 推理优化提供 vLLM 镜像；华为，沐曦等国产硬件适配可选。
+
+## 模型简介
+
+
+**【模型架构与技术突破】**
 
 Genos作为人类基因组领域的基础模型，依托数百个高质量人类基因组基准数据进行训练，实现了对人类基因组序列长达百万碱基的上下文建模能力。通过单碱基级的分辨率学习，该模型具备了识别基因组中隐含的深层序列规律与功能特征的能力，为科学家构建起连接遗传信息与生命活动的新研究方法。本次发布包含12亿参数与100亿参数两个版本，均采用混合专家（MoE）架构，通过动态路由机制实现计算资源的优化配置，显著提升模型在复杂调控网络解析中的表现。
 
-【功能模块与科学价值】 Genos具备精准识别关键功能元件的核心能力，能够深入解析微小基因变异对转录调控网络的级联效应，突破现在对非编码区调控元件的预测精度的传统方法局限，动态模拟变异位点对RNA表达谱的潜在影响，并追踪至表型形成的分子路径。在此基础上，研究团队开发了模块化应用接口，构建起"预测-解释-验证"的全链条研究体系。通过引入可解释性增强机制，该模型不仅提供高置信度的预测结果，更揭示调控网络中的关键节点与作用通路，为分子机制解析提供新的研究范式。
+**【功能模块与科学价值】** 
 
-【开放生态与临床转化】 秉承开放科学理念，Genos在Github和Huggingface提供开源模型，并同时在DCS Cloud平台部署云端推理服务。研究者可下载模型进行部署及推理，或选择在DCS Cloud云端进行部署，我们还为使用者提供了从变异功能注释到表型预测的全流程分析示例代码，帮助使用者更快熟悉模型使用方法及功能。模型权重将进行持续更新，其在精准医学、群体健康、监测及发育生物学等领域的应用潜力将进一步释放。
+Genos具备精准识别关键功能元件的核心能力，能够深入解析微小基因变异对转录调控网络的级联效应，突破现在对非编码区调控元件的预测精度的传统方法局限，动态模拟变异位点对RNA表达谱的潜在影响，并追踪至表型形成的分子路径。在此基础上，研究团队开发了模块化应用接口，构建起"预测-解释-验证"的全链条研究体系。通过引入可解释性增强机制，该模型不仅提供高置信度的预测结果，更揭示调控网络中的关键节点与作用通路，为分子机制解析提供新的研究范式。
 
-【科学哲学与未来展望】
+**【开放生态与临床转化】**
+
+秉承开放科学理念，Genos在Github和Huggingface提供开源模型，并同时在DCS Cloud平台部署云端推理服务。研究者可下载模型进行部署及推理，或选择在DCS Cloud云端进行部署，我们还为使用者提供了从变异功能注释到表型预测的全流程分析示例代码，帮助使用者更快熟悉模型使用方法及功能。模型权重将进行持续更新，其在精准医学、群体健康、监测及发育生物学等领域的应用潜力将进一步释放。
+
+**【科学哲学与未来展望】**
 
 Genos为科学家研究基因的复杂调控及对功能的影响提供了新的可能性。未来随着跨模态学习能力的提升，Genos有望成为连接遗传密码与生命现象的"翻译器"，在疾病预警、药物靶点发现及合成生物学等领域开启全新研究维度，目标实现从"基因组学"到"功能组学"的范式跨越。
 
-## 3. 模型说明
+## 模型与数据
 
-### 数据
+### 训练数据
 
-本研究整合了人类泛基因组参考联盟（HPRC）、人类基因组结构变异图谱计划（HGSVC）等国际顶级基因组学队列的标准化公开数据，构建起覆盖全球欧亚非美多样性族群的数百例全基因组近端粒到端粒（nearly telomere-to-telomere）组装的高质量基因组数据集。通过实施严格的质量控制，确保数据集在单核苷酸分辨率（single nucleotide resolution）上达到高质量高精度，为跨族群泛化能力奠定坚实基础。
+- 人类核心语料：HPRC DR2（231 个单倍型参考）、HGSVC（65）、CEPH（21）、GRCh38、CHM13，共 636 份高质量基因组，约 2,443.5B 碱基。
+- Genos-10B-v2 追加：BGI 的 CycloneSeq 平台生成的约 600 亿碱基的高覆盖率东亚人类基因组、来自 RefSeq 非人类灵长类基因组的 9501 亿碱基，以及来自 RefSeq 非灵长类哺乳动物基因组的 484.85 亿碱基，以 1:1 与核心人类语料分阶段混合。
+- 质量控制：严格过滤与标准化，覆盖全球多样族群，确保单碱基精度与跨族群泛化。
 
-![/Users/ALLEN_1/Documents/work/模型结构图(2)/居中.png](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/NpQlK5jmkj0ADqDv/img/b63bb8a7-3894-44be-8e9f-9e22f07f35d3.png)
+### 模型架构
 
-### 架构
+- 基于 Transformer 的混合专家网络，Top-2 路由，25% FFN 稀疏。
+- 超长上下文：RoPE 基数 50M，多维张量/管道/上下文/数据/专家并行；支持至 1M tokens。
+- 训练稳定性：梯度裁剪、专家负载均衡（aux loss + z-loss）、GQA 50% KV 缓存压缩、Flash Attention。
+- 推理：动态专家激活，单序列百万碱基推理可用。
 
-Genos基于Transformer架构，采用混合专家网络（Mixture-of-Experts, MoE），主要技术点包括：
+模型规格一览：
 
-1.  **超长序列单核苷酸分辨率建模** 通过引入超长序列参数化策略、多维张量并行计算与多尺度注意力机制，成功攻克百万级碱基序列的建模挑战。
-    
-2.  **训练稳定性优化体系** 针对基因组数据特有的低熵特征分布，采用专家负载均衡机制。通过梯度裁剪与专家选择策略的协同优化，避免小词汇表规模（4碱基）导致的专家模块负载失衡问题。
-    
-3.  **动态专家激活架构** 此次发布的两个模型：12亿参数版本与100亿参数版本，均支持百万级超长序列推理。动态路由算法（Dynamic Routing Algorithm）可根据输入序列的特征，实时激活相关专家模块。
-    
-| **Model Specification** | **Genos 1.2B** | **Genos 10B** |
-| --- | --- | --- |
-| **Version** | Genos 1.2B | Genos 10B |
-| ++**Model Scale**++ |  |  |
-| Total Parameters | 1.2B | 10B |
-| Activated Parameters | 0.33B | 2.87B |
-| Trained Tokens | 1600 B | 2200 B |
-| ++**Architecture**++ |  |  |
-| Architecture | MoE | MoE |
-| Number of Experts | 8 | 8 |
-| Selected Experts per Token | 2 | 2 |
-| Number of Layers | 12 | 12 |
-| Attention Hidden Dimension | 1024 | 4096 |
-| Number of Attention Heads | 16 | 16 |
-| MoE Hidden Dimension (per Expert) | 4096 | 8192 |
-| Vocabulary Size | 128 (padded) | 256 (padded) |
-| Context Length | up to 1M | up to 1M |
+| 项目 | Genos-1.2B | Genos-10B | Genos-10B-v2 |
+| --- | --- | --- | --- |
+| 总参数 | 1.2B | 10B | 10B |
+| 激活参数 | 0.33B | 2.87B | 2.87B |
+| 训练 tokens | 1600B | 2200B | 6286B |
+| 架构 | MoE | MoE | MoE |
+| 专家数 | 8 | 8 | 8 |
+| Top-k | 2 | 2 | 2 |
+| 层数 | 12 | 12 | 12 |
+| Attention hidden | 1024 | 4096 | 4096 |
+| 注意力头 | 16 | 16 | 16 |
+| MoE FFN hidden/专家 | 4096 | 8192 | 8192 |
+| 词表 | 128 (pad) | 256 (pad) | 256 (pad) |
+| 最长上下文长度 | 1M | 1M | 1M |
 
+### Genos-10B-v2 亮点
 
-## 4. 部署及使用
+- 更广物种覆盖：引入非人灵长类与多种哺乳动物序列，增强进化与保守性建模。
+- 分阶段平衡混合：新增数据与人类核心语料 1:1 逐步混合，保持人类信号的主导性同时拓展多样性。
+- 长程任务增强：在 DNALongBench 长程任务与跨物种分类上取得领先或并列领先表现。
 
-### docker部署
-我们强烈建议使用docker部署我们的模型，我们训练模型使用的镜像已经在dockerhub上面可以获取。
+## 性能测评
 
-1. 拉取环境
-   ```bash
-   docker pull bgigenos/mega:v1 
-   ```
-2. 启动容器
-   ```bash
-   docker run -it --gpus all --shm-size 32g bgigenos/mega:v1 /bin/bash
-   ```
-3. 下载权重  
+- 长序列：DNALongBench（增强子-启动子关联、eQTL 等）。
+- 短序列：基因元件/开放染色质/剪接位点等分类任务保持领先。
+- 跨物种：多物种序列与基因元件分类任务验证 v2 的进化泛化能力。
+- 变异热点与人群分类：在 8K/32K/128K 序列长度上稳定优于同类公开模型。
 
+---
+**新增评测**
+<div align="center">
+<img src="images\Evaluation_results.png" width="90%" title="Evaluation">
+</div>
 
-| Model Name        | Parameters | Huggingface ckpt | Megatron ckpt |
-|-------------------|------------|----------------|---------------|
-| `Genos-1.2B`  | 1.2B       |  [Genos-1.2B](https://huggingface.co/BGI-HangzhouAI/Genos-1.2B) |  [Genos-Megatron-1.2B](https://huggingface.co/BGI-HangzhouAI/Genos-Megatron-1.2B) |
-| `Genos-10B`       | 10B        |  [Genos-10B](https://huggingface.co/BGI-HangzhouAI/Genos-10B)   |  [Genos-Megatron-10B](https://huggingface.co/BGI-HangzhouAI/Genos-Megatron-10B)   |
+---
 
+**初版评测**
+<div align="center">
+<img src="images/评测结果.20251013.png" width="90%" title="Evaluation">
+</div>
 
-4. 使用  
-   可以参考Notebooks里面的案例调用
+## 部署与使用
 
-   - [embedding获取](Notebooks/zh/01.embedding_zh.ipynb)
-   - [族群预测](Notebooks/zh/02.Population_classify_Demo.ipynb)
+### Docker 环境部署
 
-### API接口调用
-1. 安装Genos的SDK的包
-   ```bash
-   pip install genos-client
-   ```
-2. 接口使用详细参考[SDK使用介绍](sdk/README.md)
+```bash
+docker pull bgigenos/mega:v1
+docker run -it --gpus all --shm-size 32g bgigenos/mega:v1 /bin/bash
+```
 
+### 模型权重下载
 
+| 模型 | 总参数 | Hugging Face | Megatron ckpt |
+| --- | --- | --- | --- |
+| Genos-1.2B | 1.2B | [Genos-1.2B](https://huggingface.co/BGI-HangzhouAI/Genos-1.2B) | [Genos-Megatron-1.2B](https://huggingface.co/BGI-HangzhouAI/Genos-Megatron-1.2B) |
+| Genos-10B | 10B | [Genos-10B](https://huggingface.co/BGI-HangzhouAI/Genos-10B) | [Genos-Megatron-10B](https://huggingface.co/BGI-HangzhouAI/Genos-Megatron-10B) |
+| Genos-10B-v2 | 10B | [Genos-10B-v2](https://huggingface.co/BGI-HangzhouAI/Genos-10B-v2) | [Genos-Megatron-10B-v2](https://huggingface.co/BGI-HangzhouAI/Genos-Megatron-10B-v2) |
 
-## 5. 性能测评
+### API/SDK
 
-Genos 基因基础模型评测体系
+```bash
+pip install genos-client
+```
 
-本评测体系旨在系统化评估 Genos 模型在基因组序列分析、转录效应预测以及生物医学下游应用中的2综合能力。我们采用多个标准基准数据集对Genos进行评估,包括基因组学基准（GB）、核苷酸转换器基准（NTB）和基因组学长程基准（LRB）数据集\[3-5\]，为确保可比较性，数据集划分遵循官方配置，若无官方标准则采用基于染色体的分区方案。我们对Genos 和主要同类模型的三大能力进行横向评估：
+具体调用方式见 [SDK 文档](sdk/README.md)。
 
-*   **长序列评测:** 测评模型对长程调控、以及更复杂基因互作的识别和理解。针对长程建模能力评估，采用四项LRB任务\[5\]，涵盖增强子与启动子检测（regulatory element enhancer 8K、regulatory element promoter 8K），以及变异对表达影响（variant effect causal eqtl 8K）和疾病致病性预测（variant effect pathogenic clinvar 8K）。我们为LRB任务构建了8,192 bp（8K）序列的测试数据集。其中LRB任务将22号染色体留作验证集。
-    
-*   **短序列评测:** 测评模型对基因元件的识别和理解，我们从GB中选取了三类代表性分类任务：编码与非编码序列区分（demo coding vs intergenomic seqs）、增强子检测（human enhancers cohn）及开放染色质区域识别（human ocr ensembl）\[3\]。NTB任务包含剪接位点识别（splice sites all）和组蛋白修饰分类（H3、H3K36me3）\[4\]。
-    
-*   **人群分类评测:** 测试模型是否能有效利用更长序列中包含的更多的基因信息进行更为准确的推断。我们基于人类泛基因组联盟（**H**uman **P**angenome **R**eference **C**onsortium, _BioProject ID: PRJNA730823_）数据，在非洲、东亚、欧洲三组人群上设计了人群分类任务。我们根据样本的VCF文件与参考基因组序列生成样本伪序列，基于VCF文件记录的变异位点信息截取样本9号染色体变异密集区域，采用8,192 bp（8K）、32,768 bp（32K）和131,072 bp（128K）三种长度序列，通过xgboost分类器对单条序列做分类预测。
-    
-*   **变异热点预测:** 测评模型能否仅凭序列特征捕捉局部变异的易发性，进一步考察模型是否具备刻画人群分化与演化历史相关信号的能力。我们基于中国泛基因组联盟数据（**C**hinese **P**angenome **C**onsortium ）\[6\]设计了突变热点分类任务。采用8,192 bp（8K）、32,768 bp（32K）和131,072 bp（128K）三种长度序列。通过泊松右尾检验识别突变热点，将各序列突变计数与同一染色体所有片段的背景均值比较，以错误发现率FDR < 0.05判定显著性。最终数据集由全部热点序列与等量随机选取的非热点序列合并构成。
-    
+### Notebook 使用示例
 
-![model](images/评测结果.20251013.png)
+- [embedding 获取](Notebooks/zh/01.embedding_zh.ipynb)
+- [族群预测](Notebooks/zh/02.Population_classify_Demo.ipynb)
+- [变异效应预测](Notebooks/zh/03.ClinVar_variant_predict_zh.ipynb)
+- [RNA覆盖轨迹预测](Notebooks/zh/04.RNASeqConvTrack_zh.ipynb)
 
 
-*   HyenaDNA, Nucleotide Transformer (NT), 以及GENERator系列的其他版本公开模型也进行了测试，因篇幅有限未能罗列已测评的模型还包括GENERator-1.2b，HyenaDNA-32k，HyenaDNA-450k，NT-500M，以及 Evo2-1b，这里仅展示了各系列中表现最好的模型。
-    
-*   NT公开模型中由于最大可接受输入长度为6000，在8K及以上长度输入的任务中均不可用
-    
-*   Evo2 1b公开模型中只有8K输入长度的base版本，无法用在更长输入的任务中
-    
-*   Evo2 7b，40b模型在HuggingFace框架下由于资源占用问题无法对128K或更长的序列进行推理
-    
-
-## 6. 应用场景案例说明
+## 应用案例
 
 ### 案例1：RNA-seq数据生成
 
@@ -234,7 +258,9 @@ Genos模拟生成多细胞类型RNA-seq表达量与真实测序结果结果相�
 
 不同模型在KEGG数据集上的结果对比情况如下表，其中基因模型中 Genos-10B 性能领先，文本-基因融合模型性能远超单独模态的模型，其中 021-8B与 Genos-1.2B融合模型准确率高达 98.28%，比单独用 Genos-1.2B高出 7%。
 
-![model](images/text_gLM.benchmark_res.20251020.png)
+<div align="center">
+  <img src="images/text_gLM.benchmark_res.20251020.png" alt="model" style="width:50%;">
+</div>
 
 模型说明：
 
@@ -250,17 +276,52 @@ Genos-10B: [BGI-HangzhouAI/Genos-10B](https://huggingface.co/BGI-HangzhouAI/Gen
 
 021-8B: 021 Science Foundation Model-8B is a large language model trained on extensive scientific corpora with profound scientific cognition. It is scheduled to be released at a later date. 
 
-## 7. 数据可用性
+## 推理优化与适配
 
-我们收集的公开测评数据均已标注出处，其中，我们谨此感谢人类泛基因组参考联盟HRPC（生物项目编号：PRJNA730823）及其资助机构——美国国家人类基因组研究所（NHGRI）。
+- vLLM 优化：我们在Genos上使用 vLLM 框架进行推理优化实验。该方案显著提高了吞吐量并减少了推理延迟。通过利用 vLLM 的创新 PagedAttention 算法和高效的内存管理机制，我们实现了与传统推理方法相比，吞吐量提高超过 7 倍。
+  - 拉取镜像
+  ```bash
+  docker pull bgigenos/vllm:v1
 
-模型训练和评测均基于021科学基础模型和[zero2x.org](https://zero2x.org.cn)平台开展。
+  docker run -it --entrypoint /bin/bash --gpus all --shm-size 32g bgigenos/vllm:v1
+  ```
+  - 使用vllm进行embedding推理，请参考
 
-我们测评中所用的数据集正在整理中，即将上线，敬请期待。
+- 其他硬件适配，请参考[Adaptation](Adaptation)
+  - 华为昇腾Ascend NPU
+  - 沐曦 GPU 
 
-## 8. Citation引用说明
 
-文章引用：
+## 数据可用性
+
+- 训练数据均注明来源，核心人类语料来自 HPRC、HGSVC、CEPH、GRCh38、CHM13 等。
+<div align="center">
+
+| **数据集** | **数据许可** | **来源** |
+|:---:|:---:|:---:| 
+| HPRC Data Release 2 | MIT |🌐 [HPRC](https://humanpangenome.org/hprc-data-release-2/)|
+| HGSVC | 公开网站 | 🌐 [HGSVC](https://www.internationalgenome.org/data-portal/data-collection/structural-variation) |
+| CEPH | 公开网站 |🌐 [CEPH](https://uofuhealth.utah.edu/center-genomic-medicine/research/ceph-resources)  |
+| GRCh38 | 公开网站 |🌐 [GRCh38](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.26/)|
+| CHM13 | 公开网站 |🌐 [CHM13](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009914755.1/)|
+| High-coverage East Asian human genomes | 内部数据 | 邮件联系 | 
+| RefSeq non-human primate genomes | 公开网站 |🌐 [NCBI RefSeq](https://ftp.ncbi.nlm.nih.gov/refseq/release/)  | 
+| RefSeq non-primate mammalian genomes| 公开网站 |🌐 [NCBI RefSeq](https://ftp.ncbi.nlm.nih.gov/refseq/release/)|
+
+</div>
+
+- 评测数据集整理中，将在[huggingface项目主页](https://huggingface.co/BGI-HangzhouAI/datasets)持续更新。
+  - [族群分类任务数据集](https://huggingface.co/datasets/BGI-HangzhouAI/Benchmark_Dataset-Human_population_classification)
+  - [变异热点预测任务数据集](https://huggingface.co/datasets/BGI-HangzhouAI/Benchmark_Dataset-variant_hotspot)
+  - [基因元件分类任务数据集](https://huggingface.co/datasets/BGI-HangzhouAI/Benchmark_Dataset-Genomic_element_classification)
+  - [灵长类哺乳类物种分类任务数据集](https://huggingface.co/datasets/BGI-HangzhouAI/Benchmark_Dataset-Primate_mammal_species_classification)
+
+## 许可证
+
+- 模型与代码遵循 [Apache License 2.0](LICENSE)。
+
+## 引用
+
 ```
 @article{10.1093/gigascience/giaf132,
     author = {Genos Team, Hangzhou, China},
@@ -276,16 +337,12 @@ Genos-10B: [BGI-HangzhouAI/Genos-10B](https://huggingface.co/BGI-HangzhouAI/Gen
 }
 ```
 
-## 9. Licence 说明
+## 联系我们
 
-本工作倡导生物AI社区的开放共享，支持MIT License。
+- 邮箱：[Genos@genomics.cn](mailto:Genos@genomics.cn)
+- 问题与建议：欢迎提交 Issue。
 
-## 10. 联系我们
-
-如果您疑问或合作意向，欢迎联系我们。 邮箱: Genos@genomics.cn
-
-## References
-
+## 参考文献
 \[1\] The Human Genome Project. (2003). Finishing the euchromatic sequence of the human genome. Nature, 431(7011), 931 - 945.
 
 \[2\] 1000 Genomes Project Consortium. (2010). A map of human genome variation from population - scale sequencing. Nature, 467(7319), 1061 - 1073.
