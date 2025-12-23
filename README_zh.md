@@ -285,7 +285,7 @@ Genos-10B: [BGI-HangzhouAI/Genos-10B](https://huggingface.co/BGI-HangzhouAI/Gen
 
   docker run -it --entrypoint /bin/bash --gpus all --shm-size 32g bgigenos/vllm:v1
   ```
-  - 使用vllm进行embedding推理，请参考
+  - 使用vllm进行embedding推理，请参考[vllm example](Notebooks/zh/05.vllm_example_zh.ipynb)
 
 - 其他硬件适配，请参考[Adaptation](Adaptation)
   - 华为昇腾Ascend NPU

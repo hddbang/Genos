@@ -105,7 +105,7 @@ Genos为科学家研究基因的复杂调控及对功能的影响提供了新的
 | 层数 | 12 | 12 | 12 |
 | Attention hidden | 1024 | 4096 | 4096 |
 | 注意力头 | 16 | 16 | 16 |
-| MoE FFN hidden/专家 | 4096 | 8192 | 8192 |
+| MoE FFN hidden | 4096 | 8192 | 8192 |
 | 词表 | 128 (pad) | 256 (pad) | 256 (pad) |
 | 最长上下文长度 | 1M | 1M | 1M |
 
@@ -289,7 +289,7 @@ Genos-10B: [BGI-HangzhouAI/Genos-10B](https://huggingface.co/BGI-HangzhouAI/Gen
 
   docker run -it --entrypoint /bin/bash --gpus all --shm-size 32g bgigenos/vllm:v1
   ```
-  - 使用vllm进行embedding推理，请参考
+  - 使用vllm进行embedding推理，请参考[vllm example](Notebooks/zh/05.vllm_example_zh.ipynb)
 
 - 其他硬件适配，请参考[Adaptation](Adaptation)
   - 华为昇腾Ascend NPU
