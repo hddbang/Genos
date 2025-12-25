@@ -134,7 +134,8 @@ Genos为科学家研究基因的复杂调控及对功能的影响提供了新的
 
 <div align="center">
 
-| Evaluation Task | Genos-10B | Genos-10B-v2 | GENERator-3b | HyenaDNA-1M | NT-2.5b-multi | NTv3-650M-Pre | Evo2-40b |
+<img src="images/Eval_add.png" width="90%" title="Evaluation">
+<!-- | Evaluation Task | Genos-10B | Genos-10B-v2 | GENERator-3b | HyenaDNA-1M | NT-2.5b-multi | NTv3-650M-Pre | Evo2-40b |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | demo_coding_vs_intergenomic_seqs | <span style="color: #FFA500">0.9914</span> | <span style="color: #FF0000">0.9934</span> | 0.9855 | 0.9127 | 0.9728 | 0.9830 | <span style="color: #00FF00">0.9886</span> |
 | human_ocr_ensembl | <span style="color: #00FF00">0.7623</span> | <span style="color: #FF0000">0.7660</span> | 0.7270 | 0.6916 | 0.7101 | 0.7426 | <span style="color: #FFA500">0.7635</span> |
@@ -158,11 +159,11 @@ Genos为科学家研究基因的复杂调控及对功能的影响提供了新的
 | enhancer_target_gene | \ | <span style="color: #FF0000">0.9653</span> | <span style="color: #00FF00">0.9450</span> | <span style="color: #FFA500">0.9488</span> | \ | \ | \ |
 | DNAlongbench_eqtl_Adipose_Subcutaneous | \ | <span style="color: #FFA500">0.7646</span> | <span style="color: #FF0000">0.7771</span> | <span style="color: #00FF00">0.7601</span> | \ | \ | \ |
 | DNAlongbench_eqtl_Skin_Not_Sun_Exposed_Suprapubic | \ | <span style="color: #FFA500">0.8324</span> | <span style="color: #FF0000">0.8510</span> | <span style="color: #00FF00">0.7930</span> | \ | \ | \ |
-| 18_H3_clssification | \ | <span style="color: #00FF00">0.7525</span> | <span style="color: #FF0000">0.7872</span> | <span style="color: #FFA500">0.7775</span> | 0.6797 | \ | 0.6687 |
+| 18_H3_clssification | \ | <span style="color: #00FF00">0.7525</span> | <span style="color: #FF0000">0.7872</span> | <span style="color: #FFA500">0.7775</span> | 0.6797 | \ | 0.6687 | -->
 
 </div>
 
-**颜色说明：** <span style="color: #FF0000">红色</span> = 最高分，<span style="color: #FFA500">黄色</span> = 第二高分，<span style="color: #00FF00">绿色</span> = 第三高分
+
 
 ---
 
