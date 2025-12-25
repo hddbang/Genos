@@ -129,9 +129,38 @@ Genos为科学家研究基因的复杂调控及对功能的影响提供了新的
 
 ---
 **新增评测**
+
 <div align="center">
-<img src="images\Evaluation_results.png" width="90%" title="Evaluation">
+
+| Evaluation Task | Genos-10B | Genos-10B-v2 | GENERator-3b | HyenaDNA-1M | NT-2.5b-multi | Evo2-40b |
+| --- | --- | --- | --- | --- | --- | --- |
+| demo_coding_vs_intergenomic_seqs | <span style="color: #FFA500">0.9914</span> | <span style="color: #FF0000">0.9934</span> | 0.9855 | 0.9127 | 0.9728 | <span style="color: #00FF00">0.9886</span> |
+| human_ocr_ensembl | <span style="color: #00FF00">0.7623</span> | <span style="color: #FF0000">0.7660</span> | 0.7270 | 0.6916 | 0.7101 | <span style="color: #FFA500">0.7635</span> |
+| splice_sites_all | 0.7990 | 0.7901 | <span style="color: #00FF00">0.8071</span> | 0.7110 | <span style="color: #FFA500">0.8207</span> | <span style="color: #FF0000">0.9138</span> |
+| H3 | <span style="color: #FF0000">0.9400</span> | <span style="color: #FFA500">0.9344</span> | 0.9163 | 0.8722 | 0.9254 | <span style="color: #00FF00">0.9311</span> |
+| H3K36me3 | 0.7658 | <span style="color: #00FF00">0.7858</span> | <span style="color: #FFA500">0.8247</span> | 0.6787 | 0.7822 | <span style="color: #FF0000">0.8823</span> |
+| CPC_8192 | <span style="color: #FFA500">0.9522</span> | <span style="color: #FF0000">0.9525</span> | 0.9315 | 0.8914 | \ | <span style="color: #00FF00">0.9401</span> |
+| CPC_32768 | <span style="color: #FFA500">0.9625</span> | <span style="color: #FF0000">0.9653</span> | 0.9237 | 0.9064 | \ | <span style="color: #00FF00">0.9611</span> |
+| CPC_131072 | <span style="color: #FFA500">0.9911</span> | <span style="color: #FF0000">0.9960</span> | 0.9620 | <span style="color: #00FF00">0.9735</span> | \ | \ |
+| regulatory_element_promoter_8K | <span style="color: #FFA500">0.9249</span> | <span style="color: #FF0000">0.9262</span> | 0.9195 | 0.8890 | \ | <span style="color: #00FF00">0.9227</span> |
+| regulatory_element_enhancer_8K | <span style="color: #FF0000">0.7532</span> | <span style="color: #00FF00">0.7526</span> | 0.7390 | 0.7282 | \ | <span style="color: #FFA500">0.7527</span> |
+| variant_effect_causal_eqtl_8K | 0.6773 | 0.6690 | <span style="color: #FFA500">0.6920</span> | <span style="color: #00FF00">0.6887</span> | \ | <span style="color: #FF0000">0.7054</span> |
+| variant_effect_pathogenic_clinvar_8K | <span style="color: #FF0000">0.9326</span> | <span style="color: #FFA500">0.9274</span> | 0.7206 | 0.6117 | \ | <span style="color: #00FF00">0.9167</span> |
+| primate_mammal_species_classification_1024 | \ | <span style="color: #FF0000">0.9495</span> | 0.7655 | 0.7388 | <span style="color: #FFA500">0.8133</span> | <span style="color: #00FF00">0.8069</span> |
+| primate_mammal_species_classification_8192 | \ | <span style="color: #FF0000">0.9786</span> | 0.8424 | <span style="color: #00FF00">0.8462</span> | \ | <span style="color: #FFA500">0.8867</span> |
+| primate_mammal_species_classification_32768 | \ | <span style="color: #FF0000">0.9831</span> | 0.8709 | <span style="color: #00FF00">0.8743</span> | \ | <span style="color: #FFA500">0.9101</span> |
+| primate_mammal_species_classification_131072 | \ | <span style="color: #FF0000">0.9869</span> | <span style="color: #FFA500">0.9228</span> | 0.8987 | \ | <span style="color: #00FF00">0.9194</span> |
+| human_genomic_element_classification | \ | 0.8935 | <span style="color: #FFA500">0.9173</span> | 0.8961 | <span style="color: #00FF00">0.8971</span> | <span style="color: #FF0000">0.9103</span> |
+| mouse_genomic_element_classification | \ | <span style="color: #00FF00">0.9330</span> | 0.9015 | 0.8799 | <span style="color: #FF0000">0.9939</span> | <span style="color: #FFA500">0.9888</span> |
+| multi_species_exon_classification | \ | <span style="color: #FF0000">0.9735</span> | <span style="color: #00FF00">0.9455</span> | 0.8852 | <span style="color: #FFA500">0.9619</span> | 0.9332 |
+| enhancer_target_gene | \ | <span style="color: #FF0000">0.9653</span> | <span style="color: #00FF00">0.9450</span> | <span style="color: #FFA500">0.9488</span> | \ | \ |
+| DNAlongbench_eqtl_Adipose_Subcutaneous | \ | <span style="color: #FFA500">0.7646</span> | <span style="color: #FF0000">0.7771</span> | <span style="color: #00FF00">0.7601</span> | \ | \ |
+| DNAlongbench_eqtl_Skin_Not_Sun_Exposed_Suprapubic | \ | <span style="color: #FFA500">0.8324</span> | <span style="color: #FF0000">0.8510</span> | <span style="color: #00FF00">0.7930</span> | \ | \ |
+| 18_H3_clssification | \ | <span style="color: #00FF00">0.7525</span> | <span style="color: #FF0000">0.7872</span> | <span style="color: #FFA500">0.7775</span> | 0.6797 | 0.6687 |
+
 </div>
+
+**颜色说明：** <span style="color: #FF0000">红色</span> = 最高分，<span style="color: #FFA500">黄色</span> = 第二高分，<span style="color: #00FF00">绿色</span> = 第三高分
 
 ---
 
