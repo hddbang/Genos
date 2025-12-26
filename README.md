@@ -134,7 +134,7 @@ Genos为科学家研究基因的复杂调控及对功能的影响提供了新的
 
 <div align="center">
 
-<img src="images/Eval_add.png" width="90%" title="Evaluation">
+<img src="images/Eval_add_new.png" width="90%" title="Evaluation">
 <!-- | Evaluation Task | Genos-10B | Genos-10B-v2 | GENERator-3b | HyenaDNA-1M | NT-2.5b-multi | NTv3-650M-Pre | Evo2-40b |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | demo_coding_vs_intergenomic_seqs | <span style="color: #FFA500">0.9914</span> | <span style="color: #FF0000">0.9934</span> | 0.9855 | 0.9127 | 0.9728 | 0.9830 | <span style="color: #00FF00">0.9886</span> |
