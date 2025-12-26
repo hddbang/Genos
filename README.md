@@ -51,7 +51,7 @@
 
 ## 更新速览
 
-- 2025.12.25: 新增模型评测比较`NTv3-650M-Pre`
+- 2025.12.25: 新增竞品模型`NTv3-650M-Pre`
 
 - 2025.12.18: Genos发布10B模型升级版本：[Genos-10B-v2](https://huggingface.co/BGI-HangzhouAI/Genos-10B-v2)
   - **训入新数据**：引入非人灵长类与多种哺乳动物基因组
